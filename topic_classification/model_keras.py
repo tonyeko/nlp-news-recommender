@@ -1,12 +1,8 @@
-
 import pandas as pd
-import keras
 import numpy as np
-import keras.utils
-from sklearn.preprocessing import LabelBinarizer, LabelEncoder
 from tensorflow import keras
-from sklearn.model_selection import train_test_split
 from tensorflow.keras.utils import plot_model
+from sklearn.preprocessing import LabelEncoder
 
 
 def model_keras(df_test, x_train_matrix, x_test_matrix, y_train, y_train_enc, y_train_oh, tokenizer, teks_pipeline):
@@ -27,7 +23,7 @@ def model_keras(df_test, x_train_matrix, x_test_matrix, y_train, y_train_enc, y_
 
     # Train the model
     result = model.fit(x_train_matrix, y_train_oh, batch_size=30,
-                       epochs=2, verbose=1, validation_split=0.1)
+                       epochs=30, verbose=1, validation_split=0.1)
 
     # Melihat model yang dibantuk
     # plot_model(model, show_shapes=True, show_layer_names=True)
@@ -59,34 +55,3 @@ def model_keras(df_test, x_train_matrix, x_test_matrix, y_train, y_train_enc, y_
     for i in range(len(teks_pipeline_matrix)):
         y_predict.append(encoder.classes_[np.argmax(teks_pipeline_matrix[i])])
     return y_predict
-
-
-def train_model(news):
-    df = pd.read_csv("../datasets/preprocess-bbc-text.csv")
-
-    # Split dataset
-    df_train, df_test = train_test_split(df, test_size=0.2, random_state=False)
-    y_train = df_train["category"]
-    y_test = df_test["category"]
-
-    # Tokenize data and create into matrix
-    tokenizer = keras.preprocessing.text.Tokenizer(
-        num_words=1000, char_level=False)
-    tokenizer.fit_on_texts(df_train["text"])
-    x_train_matrix = tokenizer.texts_to_matrix(df_train["text"])
-    x_test_matrix = tokenizer.texts_to_matrix(df_test["text"])
-
-    # Encoding
-    # Convert label strings to numbered index
-    encoder = LabelEncoder().fit(y_train)
-    y_train_enc = encoder.transform(y_train)
-    y_test_enc = encoder.transform(y_test)
-
-    # Converts the labels to a one-hot representation
-    number_class = np.max(y_train_enc) + 1
-    y_train_oh = keras.utils.to_categorical(y_train_enc, number_class)
-    y_test_oh = keras.utils.to_categorical(y_test_enc, number_class)
-
-    result = model_keras(df_test, x_train_matrix, x_test_matrix, y_train,
-                         y_train_enc, y_train_oh,  tokenizer, news)
-    return result
