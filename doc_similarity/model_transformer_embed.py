@@ -8,7 +8,7 @@ from transformers import AutoTokenizer, AutoModel, pipeline
 from doc_similarity.utils import print_recomendation
 
 project_path = os.getcwd()
-MODEL_NAME = 'sentence-transformers/paraphrase-MiniLM-L6-v2'
+MODEL_NAME = 'sentence-transformers/all-MiniLM-L6-v2'
 
 class BertModel:
     def __init__(self, model_name=MODEL_NAME, batch_size=4):
