@@ -1,0 +1,59 @@
+/* force refresh, hold refresh + shift */
+
+*{
+  font-family: sans-serif;
+}
+
+
+.container{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  opacity: 0.7;
+  text-align: center;
+  transform: translate(-50%,-50%); 
+  width: 100%;
+}
+.container a{
+  display: block;
+}
+
+.container button{
+  background-color: rgb(145, 145, 145);
+  border: none;
+  font-family: sans-serif;
+  padding: 7px 20px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  display: inline-block;
+  font-size: 30px;
+  cursor: pointer;
+  top: 50%;
+  left: 50%;
+  
+}
+.text{
+  color: white;
+  letter-spacing: 6px;
+  font-size: 80px;
+  font-weight: 750;
+  background: rgb(8, 6, 6);
+  position: relative;
+  animation: text 4s 1;
+}
+
+@keyframes text {
+  0%{
+    color: black;
+    letter-spacing: 27px;
+    margin-bottom: -50px;
+  }
+  40%{
+    letter-spacing: 27px;
+    margin-bottom: -50px;
+  }
+  85%{
+    letter-spacing: 8px;
+    margin-bottom: -50px;
+  }
+} 

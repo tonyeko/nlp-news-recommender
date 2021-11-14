@@ -6,15 +6,15 @@ import keras.utils
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from tensorflow import keras
-from model_keras import model_keras
+# from model_keras import model_keras
 from model_tfidf import tfidf
-from model_word2vec import word2vec
-from model_bert import bert
+# from model_word2vec import word2vec
+# from model_bert import bert
 import nltk
 
 
 def classify_topic(news):
-    df = pd.read_csv("../datasets/preprocess-bbc-text.csv")
+    df = pd.read_csv("../../datasets/preprocess-bbc-text.csv")
 
     # Split dataset
     for index, text in enumerate(df["text"]):
@@ -45,10 +45,10 @@ def classify_topic(news):
     y_train_oh = keras.utils.to_categorical(y_train_enc, number_class)
     y_test_oh = keras.utils.to_categorical(y_test_enc, number_class)
 
-    result = model_keras(df_test, x_train_matrix, x_test_matrix, y_train,
-                         y_train_enc, y_train_oh,  tokenizer, news)
+    # result = model_keras(df_test, x_train_matrix, x_test_matrix, y_train,
+    #                      y_train_enc, y_train_oh,  tokenizer, news)
 
-    # result = tfidf(df, x_train, x_test, y_train, y_test, tokenizer, news)
+    result = tfidf(df, x_train, x_test, y_train, y_test, tokenizer, news)
 
     # word2vec(df_train, df_test, y_train_oh)
 

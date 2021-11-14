@@ -1,0 +1,25 @@
+{% extends "web.html" %}
+{% block titile %}Form Page{% endblock %}
+
+{% block content %}
+<div class= "form">
+<form action = "{{url_for('form')}}" method="POST" autocomplete="off"> <br><br>
+    <p style="color:white" style="font-size:100px">Berita : </p>
+    <p style="color:white"></p><textarea id="folder" name="folder"></textarea><br><br></p>
+
+    <input type="submit" name="submit" value="oke"><br><br><br>
+    
+    {% if error %}
+        {% for hasil in error %}
+             <p class=error style="color:white" > {{ hasil }} </p>
+            {% endfor %}
+  {% endif %}
+  
+  <input type="submit" name="submit" value="home">
+  <input type="submit" name="submit" value="about"><br>
+  </form>
+  </div>
+
+  
+
+{% endblock content %}

@@ -1,0 +1,18 @@
+<html>
+    <head>
+    <!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styleshome.css') }}"> -->
+    <link rel= "stylesheet" type= "text/css" href= "static/styles/styleshome.css">
+    <title>FAT Team</title>
+    </head>
+    <body>
+      <style>
+        body{
+          background-image: url("static/img/background.gif");
+          background-size: cover;
+                   
+        }
+      </style>
+      {% block content %}
+      {% endblock content %}
+    </body>
+</html>
