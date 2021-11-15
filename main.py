@@ -4,4 +4,4 @@ from doc_similarity.main import recommend
 
 project_path = os.getcwd()
 data = pd.read_csv(f'{project_path}/datasets/bbc-text-keywords.csv')
-recommend(data['keywords'].values)
+recommend(data['keywords'].values[3], data['keywords'].values)

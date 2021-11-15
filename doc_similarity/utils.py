@@ -33,17 +33,13 @@ def remove_html(text):
     return html_pattern.sub(r'', text)
 
 
-def extract_best_indices(m, top_k):
+def extract_best_indices(cos_sim, top_k):
     """
     Use sum of the cosine distance over all tokens.
     m (np.array): cos matrix of shape (nb_in_tokens, nb_dict_tokens)
     top_k (int): number of indices to return (from high to lowest in order)
     """
     # return the sum on all tokens of cosinus for each sentence
-    if len(m.shape) > 1:
-        cos_sim = np.mean(m, axis=0)
-    else:
-        cos_sim = m
     index = np.argsort(cos_sim)[::-1]  # from highest idx to smallest score
     mask = np.logical_or(cos_sim[index] != 0, np.ones(
         len(cos_sim)))  # eliminate 0 cosine distance
@@ -51,13 +47,17 @@ def extract_best_indices(m, top_k):
     return best_index
 
 
-def print_recomendation(news_m, user_read_idx, cosine_m, top_k=10):
-    # get similarity values with other articles
-    top_k_indices = extract_best_indices(cosine_m[user_read_idx], top_k)
-
-    print(f"Article Read: {news_m[user_read_idx][:50]}...")
-    print(" ---------------------------------------------------------- ")
+def get_recommendation(news_m, cosine_m, top_k=10, verbose=False):
+    if len(cosine_m.shape) > 1:
+        cosine_m = np.mean(cosine_m, axis=0)
+    top_k_indices = extract_best_indices(cosine_m, top_k)
+    result = []
     for i in range(len(top_k_indices)):
-        print(
-            f"Recomendation {i+1}: (IDX: {top_k_indices[i]}), score: {cosine_m[top_k_indices[i]][user_read_idx]} | {news_m[top_k_indices[i]][:50]}...")
-        print()
+        best_idx = top_k_indices[i]
+        result.append(
+            {"idx": best_idx, "score": cosine_m[best_idx], "text": news_m[best_idx]})
+        if verbose:
+            print(
+                f"Recomendation {i+1}: (IDX: {best_idx}), score: {cosine_m[best_idx]} | {news_m[best_idx][:50]}...")
+            print()
+    return result

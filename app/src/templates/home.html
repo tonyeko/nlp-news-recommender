@@ -1,12 +1,14 @@
 {% extends "web.html" %}
-{% block titile %}Form Page{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="static/styles/styleshome.css">
+{% endblock %}
 
 {% block content %}
-  <div class="container">
-    <form action = "#", method="POST">
-    <a class="text">News Recommendation System</a>
-    <button class="button" value="">Next</button><br>
+<div class="custom-container">
+  <form action="#" method="POST">
+    <h1 class="text">News Recommendation System</h1>
+    <button value="" class="btn btn-primary">Next</button>
+  </form>
   </div>
+</div>
 {% endblock content %}
-
-

@@ -1,5 +1,5 @@
 # set FLASK_APP=Web.py
-# 
+#
 
 from flask import Flask, render_template
 from flask import request, redirect, url_for
@@ -11,37 +11,26 @@ app = Flask(__name__)
 
 @app.route("/", methods=["POST", "GET"])
 def home():
-    if request.method == "POST":
-        return redirect(url_for('form'))
-    else:
-        return render_template('home.html')
+    return redirect(url_for('form'))
+    # if request.method == "POST":
+    #     return redirect(url_for('form'))
+    # else:
+    #     return render_template('home.html')
 
 
 @app.route("/form", methods=["POST", "GET"])
 def form():
     if request.method == 'POST':
-        if request.form['submit'] == 'oke':
-            foldr = request.form["folder"]
-            if foldr != '':
-                hasil = mainProgram(foldr)
-                return render_template('form.html', error=hasil)
-            else:
-                return render_template('form.html')
-        elif request.form['submit'] == 'home':
-            return redirect(url_for('home'))
+        newsInput = request.form["newsInput"]
+        pipeline = request.form["pipeline"]
+        if newsInput != '':
+            topics = mainProgram(newsInput)
+            return render_template('form.html', topics=topics)
         else:
-            return redirect(url_for('about'))
+            return render_template('form.html')
+
     else:
         return render_template('form.html')
-
-
-@app.route("/about", methods=["POST", "GET"])
-def about():
-    if request.method == "POST":
-        if request.form['submit'] == 'home':
-            return redirect(url_for('home'))
-    else:
-        return render_template('about.html')
 
 
 if __name__ == '__main__':

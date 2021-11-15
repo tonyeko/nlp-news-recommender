@@ -1,25 +1,95 @@
 {% extends "web.html" %}
-{% block titile %}Form Page{% endblock %}
 
 {% block content %}
-<div class= "form">
-<form action = "{{url_for('form')}}" method="POST" autocomplete="off"> <br><br>
-    <p style="color:white" style="font-size:100px">Berita : </p>
-    <p style="color:white"></p><textarea id="folder" name="folder"></textarea><br><br></p>
+<div class="form">
+  <div class="container">
+    <div class="row my-5 text-center">
+      <h1 class="col-12">News Recommender System</h1>
+      <div class="col-12">Created By: Fano - Tony - Rifaldy</div>
+    </div>
+    <div class="row my-5">
+      <form class="card" action="{{url_for('form')}}" method="POST" autocomplete="off">
+        <div class="card-body">
 
-    <input type="submit" name="submit" value="oke"><br><br><br>
-    
-    {% if error %}
-        {% for hasil in error %}
-             <p class=error style="color:white" > {{ hasil }} </p>
-            {% endfor %}
-  {% endif %}
-  
-  <input type="submit" name="submit" value="home">
-  <input type="submit" name="submit" value="about"><br>
-  </form>
+          <div class="row mb-3">
+            <div class="col form-group">
+              <label for="newsInput" class="mb-2"><strong>News</strong></label>
+              <textarea class="form-control" name="newsInput" id="newsInput" rows="8"></textarea>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-12">
+              <label for="newsInput" class="mb-2"><strong>Pipeline</strong></label>
+            </div>
+            <div class="col">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="pipeline" id="all"
+                  value="all" checked>
+                <label class="form-check-label" for="all">All</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="pipeline" id="keyword_extraction"
+                  value="keyword_extraction">
+                <label class="form-check-label" for="keyword_extraction">Keyword Extraction</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="pipeline" id="topic_classification"
+                  value="topic_classification">
+                <label class="form-check-label" for="topic_classification">Topic Classification</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="pipeline" id="doc_similarity"
+                  value="doc_similarity">
+                <label class="form-check-label" for="doc_similarity">Document Similarity</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col">
+              <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row my-5">
+      {% if keywords %}
+      <div class="col card">
+        <div class="card-body">
+          <div class="card-title h3 mb-3"><strong>Keywords</strong></div>
+          {% for keyword in keywords %}
+          <p> {{ keyword }} </p>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+      {% if topics %}
+      <div class="col card">
+        <div class="card-body">
+          <div class="card-title h3 mb-3"><strong>Topics</strong></div>
+          {% for topic in topics %}
+          <p> {{ topic }} </p>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    <div class="row my-5">
+      {% if recommendations %}
+      <div class="col card">
+        <div class="card-body">
+          <div class="card-title h3 mb-3"><strong>Recommendations</strong></div>
+          {% for recommendation in recommendations %}
+          <p>Score: {{ recommendation.score }} </p>
+          <p>News: {{ recommendation.text }} </p>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
   </div>
-
-  
+</div>
 
 {% endblock content %}
