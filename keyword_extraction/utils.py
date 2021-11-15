@@ -84,8 +84,13 @@ def get_list_of_keywords(tokenized_sentences, model, input_ids, attention_masks,
 def get_text_keywords(text, num_of_keywords=0):
 
   config_class, model_class, tokenizer_class = (BertConfig, AutoModelForTokenClassification, BertTokenizer)
-  model = model_class.from_pretrained("saved_model/")
-  tokenizer = tokenizer_class.from_pretrained("saved_model/")
+  
+  try:
+    model = model_class.from_pretrained("../saved_models/keyword extraction")
+    tokenizer = tokenizer_class.from_pretrained("../saved_models/keyword extraction")
+  except: 
+    model = model_class.from_pretrained("../../saved_models/keyword extraction")
+    tokenizer = tokenizer_class.from_pretrained("../../saved_models/keyword extraction")
 
   sentences = tokenize.sent_tokenize(text)
   tokenized_sentences = tokenizeSentences(tokenizer, sentences)

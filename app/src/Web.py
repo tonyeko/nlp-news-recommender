@@ -4,7 +4,7 @@
 from flask import Flask, render_template
 from flask import request, redirect, url_for
 from Algoritma import mainProgram
-
+from Algoritma import extractKeywords
 
 app = Flask(__name__)
 
@@ -22,12 +22,33 @@ def home():
 def form():
     if request.method == 'POST':
         newsInput = request.form["newsInput"]
-        pipeline = request.form["pipeline"]
-        if newsInput != '':
-            topics = mainProgram(newsInput)
-            return render_template('form.html', topics=topics)
+        numOfKeywords = request.form["numOfKeywords"]
+        if(numOfKeywords != ''):
+            numOfKeywords = int(numOfKeywords)
         else:
-            return render_template('form.html')
+            numOfKeywords = 0
+        pipeline = request.form["pipeline"]
+        if(pipeline=="keyword_extraction"):
+            if newsInput != '':
+                keywords = extractKeywords(newsInput, numOfKeywords)
+                return render_template('form.html', keywords=keywords)
+            else:
+                return render_template('form.html')
+        elif(pipeline=="topic_classification"):
+            if newsInput != '':
+                topics = mainProgram(newsInput)
+                return render_template('form.html', topics=topics)
+            else:
+                return render_template('form.html')
+        elif(pipeline=="doc_similarity"):
+            print("TBI")
+        else:
+            if newsInput != '':
+                keywords = extractKeywords(newsInput, numOfKeywords)
+                topics = mainProgram(newsInput)
+                return render_template('form.html', topics=topics, keywords=keywords)
+            else:
+                return render_template('form.html')
 
     else:
         return render_template('form.html')
