@@ -23,11 +23,12 @@ def home():
 def form():
     if request.method == 'POST':
         newsInput = request.form["newsInput"]
-        numOfKeywords = request.form["numOfKeywords"]
-        if(numOfKeywords != ''):
-            numOfKeywords = int(numOfKeywords)
-        else:
-            numOfKeywords = 0
+        # numOfKeywords = request.form["numOfKeywords"]
+        # if(numOfKeywords != ''):
+        #     numOfKeywords = int(numOfKeywords)
+        # else:
+        #     numOfKeywords = 0
+        numOfKeywords=5
         pipeline = request.form["pipeline"]
         if(pipeline=="keyword_extraction"):
             if newsInput != '':
@@ -43,7 +44,7 @@ def form():
                 return render_template('form.html')
         elif(pipeline=="doc_similarity"):
             if newsInput != '':
-                recommendations = documentSimilarity(newsInput, "topic")
+                recommendations = documentSimilarity(newsInput)
                 return render_template('form.html', recommendations=recommendations)
             else:
                 return render_template('form.html')
@@ -51,7 +52,7 @@ def form():
             if newsInput != '':
                 keywords = extractKeywords(newsInput, numOfKeywords)
                 topics = mainProgram(newsInput)
-                recommendations = documentSimilarity(newsInput, "topic")
+                recommendations = documentSimilarity(newsInput, topics)
                 return render_template('form.html', topics=topics, keywords=keywords, recommendations=recommendations)
             else:
                 return render_template('form.html')
