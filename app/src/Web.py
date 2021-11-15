@@ -5,6 +5,7 @@ from flask import Flask, render_template
 from flask import request, redirect, url_for
 from Algoritma import mainProgram
 from Algoritma import extractKeywords
+from Algoritma import documentSimilarity
 
 app = Flask(__name__)
 
@@ -41,12 +42,17 @@ def form():
             else:
                 return render_template('form.html')
         elif(pipeline=="doc_similarity"):
-            print("TBI")
+            if newsInput != '':
+                recommendations = documentSimilarity(newsInput, "topic")
+                return render_template('form.html', recommendations=recommendations)
+            else:
+                return render_template('form.html')
         else:
             if newsInput != '':
                 keywords = extractKeywords(newsInput, numOfKeywords)
                 topics = mainProgram(newsInput)
-                return render_template('form.html', topics=topics, keywords=keywords)
+                recommendations = documentSimilarity(newsInput, "topic")
+                return render_template('form.html', topics=topics, keywords=keywords, recommendations=recommendations)
             else:
                 return render_template('form.html')
 
