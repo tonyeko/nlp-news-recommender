@@ -36,3 +36,9 @@ https://docs.google.com/presentation/d/1HkrIm1lZrL6xi1PPO_AB-AlOsdsZGGFcgl4weLjG
 1. Tony Eko Yuwono - 13518030
 2. Rifaldy Aristya Kelana - 13518082
 3. Kevin Austin Stefano - 13518104
+
+## PIC
+1. 13518030 : Document Similarity
+2. 13518082 : Keyword Extraction
+3. 13518104 : News Classification
+
