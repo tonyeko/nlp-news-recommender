@@ -22,4 +22,4 @@ def tfidf_recommendation(news_arr, user_input, top_k=10):
     tokens = [str(tok) for tok in tokenizer(user_input)]
     user_matrix = tf.transform(tokens)
     cosine_similarities = cosine_similarity(user_matrix, tfidf_matrix)
-    return get_recommendation(news_arr, cosine_similarities, top_k, True)
+    return get_recommendation(news_arr, cosine_similarities, top_k)

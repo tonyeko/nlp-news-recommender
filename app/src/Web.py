@@ -28,17 +28,19 @@ def form():
         #     numOfKeywords = int(numOfKeywords)
         # else:
         #     numOfKeywords = 0
-        numOfKeywords=5
+        numOfKeywords=0
         pipeline = request.form["pipeline"]
+        keywords = extractKeywords(newsInput, numOfKeywords)
+        joined_keywords = ' '.join(keywords)
+        comma_seperated_keywords = ', '.join(keywords)
         if(pipeline=="keyword_extraction"):
             if newsInput != '':
-                keywords = extractKeywords(newsInput, numOfKeywords)
-                return render_template('form.html', keywords=keywords)
+                return render_template('form.html', keywords=comma_seperated_keywords)
             else:
                 return render_template('form.html')
         elif(pipeline=="topic_classification"):
             if newsInput != '':
-                topics = mainProgram(newsInput)
+                topics = mainProgram(joined_keywords)
                 return render_template('form.html', topics=topics)
             else:
                 return render_template('form.html')
@@ -50,10 +52,9 @@ def form():
                 return render_template('form.html')
         else:
             if newsInput != '':
-                keywords = extractKeywords(newsInput, numOfKeywords)
-                topics = mainProgram(newsInput)
+                topics = mainProgram(joined_keywords)
                 recommendations = documentSimilarity(newsInput, topics)
-                return render_template('form.html', topics=topics, keywords=keywords, recommendations=recommendations)
+                return render_template('form.html', topics=topics, keywords=comma_seperated_keywords, recommendations=recommendations)
             else:
                 return render_template('form.html')
 

@@ -59,7 +59,7 @@ class BertModel:
     def load(self, file_path):
         self.embed_mat = load(file_path)
 
-    def recommend(self, news_arr, user_input, top_k=10):
+    def recommend(self, news_arr, user_input, top_k=-1):
         user_input = self.transform(user_input)
         cosine_similarities = cosine_similarity(user_input, self.embed_mat)
         return get_recommendation(news_arr, cosine_similarities, top_k)

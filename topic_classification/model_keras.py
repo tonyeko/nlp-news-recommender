@@ -23,7 +23,7 @@ def model_keras(df_test, x_train_matrix, x_test_matrix, y_train, y_train_enc, y_
 
     # Train the model
     result = model.fit(x_train_matrix, y_train_oh, batch_size=30,
-                       epochs=30, verbose=1, validation_split=0.1)
+                       epochs=3, verbose=1, validation_split=0.1)
 
     # Melihat model yang dibantuk
     # plot_model(model, show_shapes=True, show_layer_names=True)

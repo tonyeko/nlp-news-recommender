@@ -43,11 +43,11 @@ def extract_best_indices(cos_sim, top_k):
     index = np.argsort(cos_sim)[::-1]  # from highest idx to smallest score
     mask = np.logical_or(cos_sim[index] != 0, np.ones(
         len(cos_sim)))  # eliminate 0 cosine distance
-    best_index = index[mask][:top_k]
-    return best_index
+    best_index = index[mask]
+    return best_index if top_k != -1 else best_index[:top_k]
 
 
-def get_recommendation(news_m, cosine_m, top_k=10, verbose=False):
+def get_recommendation(news_m, cosine_m, top_k=-1, verbose=False):
     if len(cosine_m.shape) > 1:
         cosine_m = np.mean(cosine_m, axis=0)
     top_k_indices = extract_best_indices(cosine_m, top_k)

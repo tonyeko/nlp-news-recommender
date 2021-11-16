@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="form">
-  <div class="container">
+  <div class="container mb-3">
     <div class="row my-5 text-center">
       <h1 class="col-12">News Recommender System</h1>
       <div class="col-12">Created By: Fano - Tony - Rifaldy</div>
@@ -63,9 +63,7 @@
       <div class="col card">
         <div class="card-body">
           <div class="card-title h3 mb-3"><strong>Keywords</strong></div>
-          {% for keyword in keywords %}
-          <p> {{ keyword }} </p>
-          {% endfor %}
+          <p> {{ keywords }} </p>
         </div>
       </div>
       {% endif %}
@@ -86,8 +84,9 @@
         <div class="card-body">
           <div class="card-title h3 mb-3"><strong>Recommendations</strong></div>
           {% for recommendation in recommendations %}
-          <p>Score: {{ recommendation.score }} </p>
-          <p>News: {{ recommendation.text }} </p>
+          <p class="mb-1">Topic: {{ recommendation.topic }} </p>
+          <!-- <p class="mb-1">Score: {{ recommendation.score }} </p> -->
+          <p class="mb-5">News: {{ recommendation.text }} </p>
           {% endfor %}
         </div>
       </div>
