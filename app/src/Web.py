@@ -13,21 +13,12 @@ app = Flask(__name__)
 @app.route("/", methods=["POST", "GET"])
 def home():
     return redirect(url_for('form'))
-    # if request.method == "POST":
-    #     return redirect(url_for('form'))
-    # else:
-    #     return render_template('home.html')
 
 
 @app.route("/form", methods=["POST", "GET"])
 def form():
     if request.method == 'POST':
         newsInput = request.form["newsInput"]
-        # numOfKeywords = request.form["numOfKeywords"]
-        # if(numOfKeywords != ''):
-        #     numOfKeywords = int(numOfKeywords)
-        # else:
-        #     numOfKeywords = 0
         numOfKeywords=0
         pipeline = request.form["pipeline"]
         keywords = extractKeywords(newsInput, numOfKeywords)
