@@ -11,6 +11,7 @@ from model_tfidf import tfidf
 # from model_word2vec import word2vec
 # from model_bert import bert
 import nltk
+from topic_classification.bert import main_bert
 
 
 def classify_topic(news):
@@ -49,6 +50,8 @@ def classify_topic(news):
     #                      y_train_enc, y_train_oh,  tokenizer, news)
 
     result = tfidf(df, x_train, x_test, y_train, y_test, tokenizer, news)
+
+    # result = main_bert(news)
 
     # word2vec(df_train, df_test, y_train_oh)
 
