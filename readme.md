@@ -11,3 +11,9 @@ Cara menjalankan: <br>
 
 Link Video Demo:
 https://drive.google.com/file/d/1gR5PayMpzMKDCRqt9b5eBo_2GYSEQEX3/view?usp=sharing
+
+News Recommendation System <br>
+Anggota:<br>
+1. Tony Eko Yuwono 		- 13518030
+2. Rifaldy Aristya Kelana 	- 13518082
+3. Kevin Austin Stefano 	- 13518104
