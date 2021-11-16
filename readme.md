@@ -18,9 +18,18 @@ $ conda create --name <env> --file requirements.txt
 2. Jalankan ```set FLASK_APP=Web.py```
 3. Jalankan ```flask run```
 
+## Screenshot Aplikasi
+
+![Aplikasi](screenshot.jpeg)
+
 ## Link Video Demo
 
 https://drive.google.com/file/d/1gR5PayMpzMKDCRqt9b5eBo_2GYSEQEX3/view?usp=sharing
+
+
+## Link PPT
+
+https://docs.google.com/presentation/d/1HkrIm1lZrL6xi1PPO_AB-AlOsdsZGGFcgl4weLjGSPc/edit?usp=sharing
 
 ## Anggota
 

@@ -28,11 +28,6 @@ def remove_punctuation(text):
     return text
 
 
-def remove_html(text):
-    html_pattern = re.compile('<.*?>')
-    return html_pattern.sub(r'', text)
-
-
 def extract_best_indices(cos_sim, top_k):
     """
     Use sum of the cosine distance over all tokens.
